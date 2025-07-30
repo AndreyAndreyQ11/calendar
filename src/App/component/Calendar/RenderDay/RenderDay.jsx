@@ -21,44 +21,54 @@ export default function RenderDay({ day, dayNotFocused, onGetCalendarData }) {
     };
 
     const onSendDataOnServer = (action, index = null) => {
+        switch (action) {
+            case "push":
+                if (!newTextRemider.trim()) return;
+                patchDataOnServer("push", day.id, newTextRemider)
+                    .then(() => {
+                        console.log("Успешная отправка календарных данных");
+                        setNewTextRemider("");
+                        onGetCalendarData();
+                    })
+                    .catch(err => console.error("Ошибка загрузки календарных данных:", err));
+                break;
 
-        if (action === "push" && newTextRemider.trim()) {
-            patchDataOnServer("push", day.id, newTextRemider)
-                .then(() => {
-                    console.log("Успешная отправка календарных данных");
-                    setNewTextRemider("");
-                    onGetCalendarData();
-                })
-                .catch(err => console.error("Ошибка загрузки календарных данных:", err));
-            return;
+            case "change":
+                patchDataOnServer("change", day.id, changeTewextRemider[index], index)
+                    .then(() => {
+                        console.log("Успешная отправка календарных данных");
+                        onGetCalendarData();
+                        setChangeNewTextRemider({});
+                    })
+                    .catch(err => console.error("Ошибка загрузки календарных данных:", err));
+                break;
+
+            case "delete":
+                patchDataOnServer("delete", day.id, "", index)
+                    .then(() => {
+                        console.log("Успешная отправка календарных данных");
+                        onGetCalendarData();
+                        setChangeNewTextRemider({});
+                    })
+                    .catch(err => console.error("Ошибка загрузки календарных данных:", err));
+                break;
+
+            default:
+                console.warn(`Неизвестное действие: ${action}`);
+                break;
         }
-        if (action === "change") {
-            patchDataOnServer("change", day.id, changeTewextRemider[index], index)
-                .then(() => {
-                    console.log("Успешная отправка календарных данных");
-                    onGetCalendarData();
-                    setChangeNewTextRemider({});
-                })
-                .catch(err => console.error("Ошибка загрузки календарных данных:", err));
-            return;
-        }
-        if (action === "delete") {
-            patchDataOnServer("delete", day.id, "", index)
-                .then(() => {
-                    console.log("Успешная отправка календарных данных");
-                    onGetCalendarData();
-                    setChangeNewTextRemider({});
-                })
-                .catch(err => console.error("Ошибка загрузки календарных данных:", err));
-            return;
-        }
+    };
+
+    const monthAndDay = (day) => {
+        const [, month, dayNum] = day.split("_");
+        return `${month} ${dayNum}`;
     };
 
     return (
         <div key={day.id}
             className={`${s.day} ${dayNotFocused ? "" : s.dayNotFocused}`}
         >
-            <span>{day.id}</span>
+            <span>{monthAndDay(day.id)}</span>
             <div className={s.list}>
 
                 {day.reminder.map((item, index) => (
