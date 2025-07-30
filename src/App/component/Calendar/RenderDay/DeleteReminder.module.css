@@ -1,0 +1,27 @@
+.deleteReminder {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  user-select: none;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  right: 0;
+
+  transform: translate(100%, 0);
+  transition: background-color 0.3s ease;
+}
+
+.deleteReminder:hover,
+.deleteReminder:focus {
+  background-color: darkred;
+}

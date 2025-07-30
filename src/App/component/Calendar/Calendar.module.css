@@ -1,0 +1,12 @@
+.calendar {
+  border: 12px solid rgb(50, 214, 0);
+  border-radius: 6px;
+  background-color: rgb(0, 154, 175);
+  padding: 0 4px 4px 4px;
+}
+
+.week {
+  display: flex;
+  column-gap: 4px;
+  padding-top: 4px;
+}

@@ -1,0 +1,35 @@
+.day {
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  width: calc(100% / 7);
+
+  background-color: rgb(255, 255, 255);
+}
+.dayNotFocused {
+  filter: brightness(80%);
+}
+.list {
+  margin: 0px;
+  padding: 0;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+}
+.items {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  position: relative;
+}
+
+.items > input {
+  width: 60px;
+}
