@@ -59,10 +59,10 @@ export default function RenderDay({ day, dayNotFocused, onGetCalendarData }) {
             className={`${s.day} ${dayNotFocused ? "" : s.dayNotFocused}`}
         >
             <span>{day.id}</span>
-            <ol className={s.list}>
+            <div className={s.list}>
 
                 {day.reminder.map((item, index) => (
-                    <li key={item + index} className={s.items} >
+                    <div key={item + index} className={s.items} >
                         <input
                             value={changeTewextRemider[index] ?? item}
                             onChange={(e) => inputChangeText(index, e.target.value)}
@@ -72,18 +72,18 @@ export default function RenderDay({ day, dayNotFocused, onGetCalendarData }) {
                             index={index}
                             onSendDataOnServer={onSendDataOnServer}
                         />
-                    </li>
+                    </div>
                 ))}
 
-                <li className={s.items} >
+                <div className={s.items} >
                     <input
                         placeholder="text..."
                         value={newTextRemider}
                         onChange={inputNewText}
                         onBlur={() => onSendDataOnServer("push")}
                     />
-                </li>
-            </ol>
+                </div>
+            </div>
         </div >
     );
 }
